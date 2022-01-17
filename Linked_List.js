@@ -76,3 +76,93 @@ hello.delete(4);
 console.log(hello.head);
 hello.delete(5);
 console.log(hello.head);
+
+// Double Linkted_List 구현
+
+class Node {
+  constructor(data, prev = undefined, next = undefined) {
+    this.self = { data, prev: prev, next: next };
+  }
+}
+
+class NodeMgmt {
+  __init__(data) {
+    let node = new Node(data).self;
+    this.self = node;
+    this.head = node;
+    this.tail = node;
+  }
+
+  insert(data) {
+    let temp = this.self;
+
+    while (temp) {
+      if (temp.next) {
+        temp = temp.next;
+      } else {
+        let newData = new Node(data).self;
+        temp.next = newData;
+        temp.next.prev = temp;
+        this.tail = newData;
+        break;
+      }
+    }
+  }
+
+  desc() {
+    let temp = this.self;
+
+    while (this.self) {
+      console.log(temp.data);
+      temp = temp.next;
+
+      if (!temp.next) {
+        console.log(temp.data);
+        break;
+      }
+    }
+  }
+
+  insert_before(beforeData, addData) {
+    let temp = this.self;
+
+    while (temp) {
+      if (temp.next.data !== beforeData) {
+        temp = temp.next;
+      } else {
+        let addObj = { data: addData, next: temp.next, prev: temp };
+        temp.next.prev = addObj;
+        temp.next = addObj;
+        break;
+      }
+    }
+  }
+
+  insert_after(afterData, addData) {
+    let temp = this.self;
+
+    while (temp) {
+      if (temp.data !== afterData) {
+        temp = temp.next;
+      } else {
+        let addObj = { data: addData, next: temp.next, prev: temp };
+
+        temp.next.prev = addObj;
+        temp.next = addObj;
+        break;
+      }
+    }
+  }
+}
+
+let hello = new NodeMgmt();
+
+hello.__init__(1);
+hello.insert(2);
+hello.insert(3);
+hello.insert(4);
+
+hello.insert_before(2, 1.5);
+hello.insert_after(3, 3.5);
+
+hello.insert(5);
