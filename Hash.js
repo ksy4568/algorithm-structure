@@ -76,3 +76,86 @@ function test2() {
 
   // -> class 정보 은닉 스터디 필요..
 }
+
+// Hash의 충돌을 Linear Probling 기법을 활용하여 막는 방법 구현
+function test3() {
+  class Hash {
+    constructor() {
+      this.hash_allow = 8;
+      this.hash_table = new Array(this.hash_allow);
+    }
+    
+    get_key(data) {
+      let key = '';
+      for(let i = 0; i < data.length; i++) {
+        key = `${key}${data[i].charCodeAt()}`;
+      }
+      return Number(key);
+    }
+    
+    hash_function(data) {
+      return data % this.hash_allow;
+    }
+    
+    save_data(data, value) {
+      let index_key = this.get_key(data);
+      let hash_address = this.hash_function(index_key);
+      
+      if(!this.hash_table[hash_address]) {
+        this.hash_table[hash_address] = [index_key, value];
+      } else {
+          for(let i = hash_address; i < this.hash_table.length; i++) {
+            if(!this.hash_table[i]) {
+              this.hash_table[i] = [index_key, value];
+              return;
+            } else if (this.hash_table[i][0] === index_key) {
+              this.hash_table[i] = [index_key, value];
+              return;
+            }
+            if(i === this.hash_table.length - 1) {
+              console.log('havent storage');
+            }
+        }
+      }
+    }
+    
+    read_data(data) {
+      let index_key = this.get_key(data);
+      let hash_address = this.hash_function(index_key);
+      
+      if(!this.hash_table[hash_address]) {
+        console.log('No data');
+        return;
+      }
+      
+      if(this.hash_table[hash_address][0] === index_key) {
+        return this.hash_table[hash_address][1];
+      } else {
+        for(let i = hash_address; i < this.hash_table.length; i++) {
+          if(this.hash_table[i][0] === index_key) {
+            return this.hash_table[i][1];
+          } else if (i === this.hash_table.length - 1){
+            console.log('No data');
+          }
+        }
+      }
+    }
+  }
+  
+  let hash = new Hash();
+  
+  hash.save_data('angy', '0101123')
+  hash.save_data('rnaw', '92324')
+  hash.save_data('tony', 'werja')
+  hash.save_data('angy', '444444')
+  hash.save_data('fq', '55555')
+  hash.save_data('r', '66666')
+  hash.save_data('t', 77777);
+  hash.save_data('u', '3441')
+  hash.save_data('v', 'wrsdfnnnn')
+  
+  hash.read_data('angy');
+  hash.read_data('r');
+  hash.read_data('v');
+  hash.read_data('suyeon');
+}
