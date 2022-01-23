@@ -1,3 +1,6 @@
+let crypto = require('crypto');
+const { create } = require('domain');
+
 function test1() {
   let dataNum = 4;
 
@@ -86,11 +89,17 @@ function test3() {
     }
     
     get_key(data) {
-      let key = '';
-      for(let i = 0; i < data.length; i++) {
-        key = `${key}${data[i].charCodeAt()}`;
-      }
-      return Number(key);
+      // let key = '';
+      // for(let i = 0; i < data.length; i++) {
+      //   key = `${key}${data[i].charCodeAt()}`;
+      // }
+      // return Number(key);
+
+      let createHash = crypto.createHash('sha256');
+      createHash.update(data);
+      let sixteenCode = createHash.digest('hex')
+      
+      return parseInt(sixteenCode, 10);
     }
     
     hash_function(data) {
@@ -145,17 +154,20 @@ function test3() {
   let hash = new Hash();
   
   hash.save_data('angy', '0101123')
-  hash.save_data('rnaw', '92324')
   hash.save_data('tony', 'werja')
   hash.save_data('angy', '444444')
+  hash.save_data('rnaw', '92324')
   hash.save_data('fq', '55555')
   hash.save_data('r', '66666')
-  hash.save_data('t', 77777);
+  hash.save_data('t', 77777)
   hash.save_data('u', '3441')
   hash.save_data('v', 'wrsdfnnnn')
+  console.log(hash.hash_table);
   
-  hash.read_data('angy');
-  hash.read_data('r');
-  hash.read_data('v');
-  hash.read_data('suyeon');
+  console.log(hash.read_data('angy'));
+  console.log(hash.read_data('r'));
+  console.log(hash.read_data('v'));
+  console.log(hash.read_data('suyeon'));
 }
+
+test3();
