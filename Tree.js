@@ -30,8 +30,29 @@ function test1() {
           }
         }
       }
+    }
+
+    search(data) {
+      if(!data) {
+        console.log('input data');
+        return;
+      }
+      
+      let point = this.self;
+
+      while (point) {
+        if(point.data === data) {
+          console.log('Have data');
+          return;
+        } else if (point.data < data) {
+          point = point.right;
+        } else if (point.data >= data) {
+          point = point.left;
+        }
+      }
+      return console.log('No data')
+    }
   }
-}
   
   let hello = new NodeMgmt();
   hello.insert(20);
@@ -48,6 +69,7 @@ function test1() {
   console.log('-----')
   hello.insert(23);
   console.log(hello); 
+  hello.search(19);
 }
 
 test1();
