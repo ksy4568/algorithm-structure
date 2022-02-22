@@ -17,4 +17,28 @@ function test1 () {
 
     return cache[num]
   }
+
+}
+
+// 백준 2*n 직사각형 채우기 문제
+function test2() {
+  function question1(n) {
+    if(n === 1) return 1;
+    if(n === 2) return 2;
+
+    if(n > 2) return question1(n - 2) + question1(n - 1);
+  }
+
+  function question2(n) {
+    let arr = [];
+    arr[0] = 0;
+    arr[1] = 1;
+    arr[2] = 2;
+
+    for(let i = 3; i < 1001; i++) {
+      arr[i] = arr[i - 1] + arr[i - 2];
+    }
+
+    return arr[n];
+  }
 }
