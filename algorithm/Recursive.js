@@ -82,4 +82,15 @@ function test4() {
   }
   
   recursive(3)
+
+  // n이 4일 경우 1, 2, 3의 조합으로 더해서 4가될 수 있는 경우의 수를 구하시오.
+  function recursive2(num) {
+    if(num === 1) return 1;
+    else if(num === 2) return 2;
+    else if(num === 3) return 4;
+    
+    return recursive2(num - 3) + recursive2(num - 2) + recursive2(num - 1);
+  }
+  
+  recursive2(4)
 }

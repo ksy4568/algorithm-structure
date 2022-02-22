@@ -42,3 +42,17 @@ function test2() {
     return arr[n];
   }
 }
+
+// 백준 파도반 수열 문제
+function test3() {
+  function question(n) {
+    if(n <= 3) return 1;
+    if(n <= 5) return 2;
+
+    return question(n - 3) + question(n - 2);
+  }
+
+  question(2);
+  question(6);
+  question(12);
+}
