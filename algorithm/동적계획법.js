@@ -56,3 +56,13 @@ function test3() {
   question(6);
   question(12);
 }
+
+// 백준 01타일
+function test4() {
+  function question(n) {
+    if(n === 1) return 1;
+    if(n === 2) return 2;
+
+    return question(n - 2) + question(n - 1);
+  }
+}
