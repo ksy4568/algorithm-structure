@@ -2,7 +2,8 @@
 
 // 문제에서는 수열을 array로 받지 않고 정수 하나씩 받지만, 편의상 array로 대체하였다.
 
-// 1. 
+// 1. 숫자를 stack에 push할 때는 해당 숫자까지 오름차순이라는 것을 파악하기
+// 2. 숫자를 pop할 때 pop시점에서 stack의 제일 큰 수부터 내림차순으로 pop해야하는 것을 파악하기
 
 function question(n, arr) {
   // arr에 있는 값들 중에 얼마만큼 숫자를 stack에 push했는지 memorize하기 위해 생성
